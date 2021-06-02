@@ -50,7 +50,15 @@ public class HttpUtil {
 
         for (Map.Entry<String, List<String>> entry : headerMap.entrySet()) {
             if (entry.getKey() != null) {
-                jsonHeaders.putString(entry.getKey(), entry.getValue().get(0));
+                if(entry.getKey().equals("Set-Cookie") && entry.getValue().size() > 1){
+                  if(entry.getValue().size() == 2) {
+                    jsonHeaders.putString(entry.getKey(), entry.getValue().get(1));
+                  }else{
+                    jsonHeaders.putString(entry.getKey(), entry.getValue().get(3));
+                  }
+                }else {
+                  jsonHeaders.putString(entry.getKey(), entry.getValue().get(0));
+                }
             }
         }
 
