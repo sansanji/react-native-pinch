@@ -53,8 +53,10 @@ public class HttpUtil {
                 if(entry.getKey().equals("Set-Cookie") && entry.getValue().size() > 1){
                   if(entry.getValue().size() == 2) {
                     jsonHeaders.putString(entry.getKey(), entry.getValue().get(1));
-                  }else{
+                  }else if(entry.getValue().size() == 4){
                     jsonHeaders.putString(entry.getKey(), entry.getValue().get(3));
+                  }else {
+                    jsonHeaders.putString(entry.getKey(), entry.getValue().get(0));
                   }
                 }else {
                   jsonHeaders.putString(entry.getKey(), entry.getValue().get(0));
